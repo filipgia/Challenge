@@ -1,6 +1,19 @@
-import * as tf from '@tensorflow/tfjs-core';
-import '@tensorflow/tfjs-backend-webgl';
+const brain = require('brain.js')
+const letters = require('./letters');
 
-const a = tf.tensor([1,2,3,4]);
-const b = tf.sum(a);
+
+
+module.exports.findLetter = function(hashtags){
+
+
+function normalize(string){
+        return string.split('').map(toNumber);
+    }
+
+function toNumber(character){
+        return character === '#' ? 1 : 0;
+    }
+ console.log(normalize(letters.a));
+}
+
 

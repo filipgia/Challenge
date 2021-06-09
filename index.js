@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const letters = require('./letters');
+const ml = require("./ml");
 
 var jsonParser = express.json();
 
@@ -33,7 +34,7 @@ app.post('/api/letters/recognition', jsonParser,(req, res) => {
 
 })
 
-console.log(letters);
+console.log(ml.findLetter('test'));
 
 app.get('/api', (req, res) => {
     res.send('API is working');
