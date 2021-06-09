@@ -6,7 +6,7 @@ const letters = require('./letters');
 
 var jsonParser = express.json();
 
-app.post('/api/recognize', jsonParser,(req, res) => {
+app.post('/api/letters/recognition', jsonParser,(req, res) => {
 
     if (req.body.letter) {
         var letter = '';
