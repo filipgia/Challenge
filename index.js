@@ -22,7 +22,7 @@ app.post('/api/recognize', jsonParser,(req, res) => {
 
 
         if (letter) {
-            res.send(`I found it. It's '${letter}'`);
+            res.send(`I found it!!. It's '${letter}'`);
         } else {
             res.send(`I couldn't find it.`);
         }
