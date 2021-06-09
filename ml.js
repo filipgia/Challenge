@@ -23,16 +23,15 @@ module.exports.findLetter = function(hashtags) {
     errorThresh: 0.025
   });
 
-  const result = net.run(
-    normalize(
-      ".#####." +
+  const result = brain.likely(normalize(
+        ".#####." +
         "#.....#" +
         "#.....#" +
         "###.###" +
         "#.....#" +
         "#.....#" +
         "#.....#"
-    )
-  );
+    ),net);
+  
   return console.log(result);
 };
