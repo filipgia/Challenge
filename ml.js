@@ -1,19 +1,38 @@
-const brain = require('brain.js')
-const letters = require('./letters');
+const brain = require("brain.js");
+const letters = require("./letters");
 
+module.exports.findLetter = function(hashtags) {
+  function normalize(string) {
+    return string.split("").map(toNumber);
+  }
 
+  function toNumber(character) {
+    return character === "#" ? 1 : 0;
+  }
+  console.log(normalize(letters.a));
 
-module.exports.findLetter = function(hashtags){
+  const net = new brain.NeuralNetwork();
+  const trainingData = [
+    { input: normalize(letters.a), output: { a: 1 } },
+    { input: normalize(letters.b), output: { b: 1 } },
+    { input: normalize(letters.c), output: { c: 1 } },
+    { input: normalize(letters.aWithError), output: { a: 1 } }
+  ];
 
+  net.train(trainingData, {
+    errorThresh: 0.025
+  });
 
-function normalize(string){
-        return string.split('').map(toNumber);
-    }
-
-function toNumber(character){
-        return character === '#' ? 1 : 0;
-    }
- console.log(normalize(letters.a));
-}
-
-
+  const result = net.run(
+    normalize(
+      ".#####." +
+        "#.....#" +
+        "#.....#" +
+        "###.###" +
+        "#.....#" +
+        "#.....#" +
+        "#.....#"
+    )
+  );
+  return console.log(result);
+};
