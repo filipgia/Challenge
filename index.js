@@ -4,6 +4,7 @@ const port = 3000;
 const letters = require("./letters");
 const ml = require("./ml");
 
+ml.trainData();
 var jsonParser = express.json();
 
 app.post("/api/letters/recognition", jsonParser, (req, res) => {
@@ -13,7 +14,7 @@ app.post("/api/letters/recognition", jsonParser, (req, res) => {
       letter = ml.findLetter(arg);
 
     if (letter && letter!=null) {
-      res.send(`I found it!!. It's '${letter}'`);
+      res.send(`I found it! It's '${letter}'`);
     } else {
       res.send(`I couldn't find it.`);
     }
@@ -36,5 +37,5 @@ app.get("/api", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("App listening on http://localhost:${port}");
+  console.log(`App listening on http://localhost:${port}`);
 });
