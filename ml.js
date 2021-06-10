@@ -1,7 +1,7 @@
 const brain = require("brain.js");
 const letters = require("./letters");
 
-module.exports.findLetter = function(hashtags) {
+module.exports.findLetter = function (hashtags) {
   function normalize(string) {
     return string.split("").map(toNumber);
   }
@@ -20,18 +20,11 @@ module.exports.findLetter = function(hashtags) {
   ];
 
   net.train(trainingData, {
-    errorThresh: 0.025
+    log: (stats) => console.log(stats),
+    errorThresh: 0.0025
   });
 
-  const result = brain.likely(normalize(
-        ".#####." +
-        "#.....#" +
-        "#.....#" +
-        "###.###" +
-        "#.....#" +
-        "#.....#" +
-        "#.....#"
-    ),net);
-  
-  return console.log(result);
+  const result = brain.likely(normalize(hashtags), net);
+
+  return result;
 };

@@ -29,7 +29,14 @@ app.post("/api/letters/recognition", jsonParser, (req, res) => {
   }
 });
 
-console.log(ml.findLetter("test"));
+console.log(ml.findLetter(".#####." +
+"#.....#" +
+"#.....#" +
+"#######" +
+"#.....#" +
+"#.....#" +
+"#.....#"
+));
 
 app.get("/api", (req, res) => {
   res.send("API is working");
