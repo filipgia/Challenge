@@ -7,19 +7,12 @@ const ml = require("./ml");
 var jsonParser = express.json();
 
 app.post("/api/letters/recognition", jsonParser, (req, res) => {
-  if (req.body.letter) {
-    var letter = "";
-    for (const key in letters) {
-      if (Object.hasOwnProperty.call(letters, key)) {
-        const l = letters[key];
-        if (req.body.letter == l) {
-          letter = key;
-          break;
-        }
-      }
-    }
+  var arg = req.body.letter;
+  if (arg) {
+      var letter = '';
+      letter = ml.findLetter(arg);
 
-    if (letter) {
+    if (letter && letter!=null) {
       res.send(`I found it!!. It's '${letter}'`);
     } else {
       res.send(`I couldn't find it.`);
@@ -29,14 +22,14 @@ app.post("/api/letters/recognition", jsonParser, (req, res) => {
   }
 });
 
-console.log(ml.findLetter(".#####." +
+ml.findLetter(".#####." +
 "#.....#" +
 "#.....#" +
 "#######" +
 "#.....#" +
 "#.....#" +
 "#.....#"
-));
+);
 
 app.get("/api", (req, res) => {
   res.send("API is working");
