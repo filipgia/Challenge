@@ -23,14 +23,6 @@ app.post("/api/letters/recognition", jsonParser, (req, res) => {
   }
 });
 
-ml.findLetter(".#####." +
-"#.....#" +
-"#.....#" +
-"#######" +
-"#.....#" +
-"#.....#" +
-"#.....#"
-);
 
 app.get("/api", (req, res) => {
   res.send("API is working");
