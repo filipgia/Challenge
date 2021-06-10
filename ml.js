@@ -1,17 +1,17 @@
 const brain = require("brain.js");
 const letters = require("./letters");
 
-module.exports.findLetter = function (hashtags) {
-  //normalizing the data for faster training
-  function normalize(string) {
-    return string.split("").map(toNumber);
-  }
+trainedNetwork = [];
+//normalizing the data for faster training
+function normalize(string) {
+  return string.split("").map(toNumber);
+}
 
-  function toNumber(character) {
-    return character === "#" ? 1 : 0;
-  }
+function toNumber(character) {
+  return character === "#" ? 1 : 0;
+}
+module.exports.trainData = function () {
   
-
   const net = new brain.NeuralNetwork();
   //preparing the data for training
   const trainingData = [
@@ -20,12 +20,19 @@ module.exports.findLetter = function (hashtags) {
     { input: normalize(letters.c), output: { c: 1 } },
     { input: normalize(letters.aWithError), output: { a: 1 } }
   ];
-//training the data
+  //training the data
   net.train(trainingData, {
     errorThresh: 0.0025
   });
-//returning the result with highest prob
-  const result = brain.likely(normalize(hashtags), net);
+
+  trainedNetwork = net;
+}
+
+
+module.exports.findLetter = function (hashtags) {
+
+  //returning the result with highest prob
+  const result = brain.likely(normalize(hashtags), trainedNetwork);
 
   return result;
 };
